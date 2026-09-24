@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8A9B2C3D-4E5F-6A7B-8C9D-0E1F2A3B4C5D}</ProjectGuid>
+    <RootNamespace>FortniteExternal</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ext</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(ProjectDir)source;$(ProjectDir)api\driver;$(ProjectDir)mapper\includes;$(ProjectDir)source\gui;$(ProjectDir)source\radar;$(ProjectDir)source\settings_new;$(ProjectDir)source\slate\include;$(ProjectDir)source\spectators;$(ProjectDir)source\values;$(ProjectDir)auth;$(ProjectDir)imgui;$(ProjectDir)freetype\include;$(ProjectDir)nlohmann;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)auth;$(ProjectDir)freetype\win64;$(LibraryPath)</LibraryPath>
+    <TargetName>Loader</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir);$(ProjectDir)source;$(ProjectDir)api\driver;$(ProjectDir)mapper\includes;$(ProjectDir)source\gui;$(ProjectDir)source\radar;$(ProjectDir)source\settings_new;$(ProjectDir)source\slate\include;$(ProjectDir)source\spectators;$(ProjectDir)source\values;$(ProjectDir)auth;$(ProjectDir)imgui;$(ProjectDir)freetype\include;$(ProjectDir)nlohmann;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)auth;$(ProjectDir)freetype\win64;$(LibraryPath)</LibraryPath>
+    <TargetName>Loader</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DISABLE_OUTPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>freetype.lib;freetype64.lib;d3d11.lib;dwmapi.lib;urlmon.lib;version.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;DISABLE_OUTPUT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>library_x64.lib;freetype.lib;freetype64.lib;d3d11.lib;dwmapi.lib;urlmon.lib;version.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="api\driver\driver_um_lib.cpp" />
+    <ClCompile Include="mapper\intel_driver.cpp" />
+    <ClCompile Include="mapper\kdmapper.cpp" />
+    <ClCompile Include="mapper\mapper_bridge.cpp" />
+    <ClCompile Include="mapper\pdb_offsets.cpp" />
+    <ClCompile Include="mapper\portable_executable.cpp" />
+    <ClCompile Include="mapper\service.cpp" />
+    <ClCompile Include="mapper\utils.cpp" />
+    <ClCompile Include="protection\advanced\ntapi.cpp" />
+    <ClCompile Include="protection\AntiTamper\AntiTamperLib.cpp" />
+    <ClCompile Include="protection\Backend\Backend.cpp" />
+    <ClCompile Include="protection\dump_protect\FileLoader.cpp" />
+    <ClCompile Include="protection\dump_protect\MemoryLoader.cpp" />
+    <ClCompile Include="protection\dump_protect\ProcessHollower.cpp" />
+    <ClCompile Include="source\gui\gui.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\slate\src\draw.cpp" />
+    <ClCompile Include="source\slate\src\search.cpp" />
+    <ClCompile Include="source\slate\src\slate.cpp" />
+    <ClCompile Include="source\slate\src\style.cpp" />
+    <ClCompile Include="source\slate\src\widgets.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_freetype.cpp" />
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="source\tab_aimbot.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="api\driver\driver_includes.hpp" />
+    <ClInclude Include="api\driver\driver_shared.hpp" />
+    <ClInclude Include="api\driver\driver_um_lib.hpp" />
+    <ClInclude Include="auth\skStr.h" />
+    <ClInclude Include="mapper\includes\intel_driver.hpp" />
+    <ClInclude Include="mapper\includes\intel_driver_resource.hpp" />
+    <ClInclude Include="mapper\includes\kdmapper.hpp" />
+    <ClInclude Include="mapper\includes\loader_offsets.hpp" />
+    <ClInclude Include="mapper\includes\mapper_bridge.hpp" />
+    <ClInclude Include="mapper\includes\nt.hpp" />
+    <ClInclude Include="mapper\includes\pdb_offsets.hpp" />
+    <ClInclude Include="mapper\includes\portable_executable.hpp" />
+    <ClInclude Include="mapper\includes\service.hpp" />
+    <ClInclude Include="mapper\includes\utils.hpp" />
+    <ClInclude Include="freetype\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="freetype\include\freetype\config\ftheader.h" />
+    <ClInclude Include="freetype\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="freetype\include\freetype\config\ftoption.h" />
+    <ClInclude Include="freetype\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="freetype\include\freetype\config\integer-types.h" />
+    <ClInclude Include="freetype\include\freetype\config\mac-support.h" />
+    <ClInclude Include="freetype\include\freetype\config\public-macros.h" />
+    <ClInclude Include="freetype\include\freetype\freetype.h" />
+    <ClInclude Include="freetype\include\freetype\ftadvanc.h" />
+    <ClInclude Include="freetype\include\freetype\ftbbox.h" />
+    <ClInclude Include="freetype\include\freetype\ftbdf.h" />
+    <ClInclude Include="freetype\include\freetype\ftbitmap.h" />
+    <ClInclude Include="freetype\include\freetype\ftbzip2.h" />
+    <ClInclude Include="freetype\include\freetype\ftcache.h" />
+    <ClInclude Include="freetype\include\freetype\ftchapters.h" />
+    <ClInclude Include="freetype\include\freetype\ftcid.h" />
+    <ClInclude Include="freetype\include\freetype\ftcolor.h" />
+    <ClInclude Include="freetype\include\freetype\ftdriver.h" />
+    <ClInclude Include="freetype\include\freetype\fterrdef.h" />
+    <ClInclude Include="freetype\include\freetype\fterrors.h" />
+    <ClInclude Include="freetype\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="freetype\include\freetype\ftgasp.h" />
+    <ClInclude Include="freetype\include\freetype\ftglyph.h" />
+    <ClInclude Include="freetype\include\freetype\ftgxval.h" />
+    <ClInclude Include="freetype\include\freetype\ftgzip.h" />
+    <ClInclude Include="freetype\include\freetype\ftimage.h" />
+    <ClInclude Include="freetype\include\freetype\ftincrem.h" />
+    <ClInclude Include="freetype\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="freetype\include\freetype\ftlist.h" />
+    <ClInclude Include="freetype\include\freetype\ftlogging.h" />
+    <ClInclude Include="freetype\include\freetype\ftlzw.h" />
+    <ClInclude Include="freetype\include\freetype\ftmac.h" />
+    <ClInclude Include="freetype\include\freetype\ftmm.h" />
+    <ClInclude Include="freetype\include\freetype\ftmodapi.h" />
+    <ClInclude Include="freetype\include\freetype\ftmoderr.h" />
+    <ClInclude Include="freetype\include\freetype\ftotval.h" />
+    <ClInclude Include="freetype\include\freetype\ftoutln.h" />
+    <ClInclude Include="freetype\include\freetype\ftparams.h" />
+    <ClInclude Include="freetype\include\freetype\ftpfr.h" />
+    <ClInclude Include="freetype\include\freetype\ftrender.h" />
+    <ClInclude Include="freetype\include\freetype\ftsizes.h" />
+    <ClInclude Include="freetype\include\freetype\ftsnames.h" />
+    <ClInclude Include="freetype\include\freetype\ftstroke.h" />
+    <ClInclude Include="freetype\include\freetype\ftsynth.h" />
+    <ClInclude Include="freetype\include\freetype\ftsystem.h" />
+    <ClInclude Include="freetype\include\freetype\fttrigon.h" />
+    <ClInclude Include="freetype\include\freetype\fttypes.h" />
+    <ClInclude Include="freetype\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="freetype\include\freetype\otsvg.h" />
+    <ClInclude Include="freetype\include\freetype\t1tables.h" />
+    <ClInclude Include="freetype\include\freetype\ttnameid.h" />
+    <ClInclude Include="freetype\include\freetype\tttables.h" />
+    <ClInclude Include="freetype\include\freetype\tttags.h" />
+    <ClInclude Include="freetype\include\ft2build.h" />
+    <ClInclude Include="imgui\imgui_settings.h" />
+    <ClInclude Include="nlohmann\adl_serializer.hpp" />
+    <ClInclude Include="nlohmann\byte_container_with_subtype.hpp" />
+    <ClInclude Include="nlohmann\detail\conversions\from_json.hpp" />
+    <ClInclude Include="nlohmann\detail\conversions\to_chars.hpp" />
+    <ClInclude Include="nlohmann\detail\conversions\to_json.hpp" />
+    <ClInclude Include="nlohmann\detail\exceptions.hpp" />
+    <ClInclude Include="nlohmann\detail\hash.hpp" />
+    <ClInclude Include="nlohmann\detail\input\binary_reader.hpp" />
+    <ClInclude Include="nlohmann\detail\input\input_adapters.hpp" />
+    <ClInclude Include="nlohmann\detail\input\json_sax.hpp" />
+    <ClInclude Include="nlohmann\detail\input\lexer.hpp" />
+    <ClInclude Include="nlohmann\detail\input\parser.hpp" />
+    <ClInclude Include="nlohmann\detail\input\position_t.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\internal_iterator.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\iteration_proxy.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\iterator_traits.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\iter_impl.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\json_reverse_iterator.hpp" />
+    <ClInclude Include="nlohmann\detail\iterators\primitive_iterator.hpp" />
+    <ClInclude Include="nlohmann\detail\json_pointer.hpp" />
+    <ClInclude Include="nlohmann\detail\json_ref.hpp" />
+    <ClInclude Include="nlohmann\detail\macro_scope.hpp" />
+    <ClInclude Include="nlohmann\detail\macro_unscope.hpp" />
+    <ClInclude Include="nlohmann\detail\meta\cpp_future.hpp" />
+    <ClInclude Include="nlohmann\detail\meta\detected.hpp" />
+    <ClInclude Include="nlohmann\detail\meta\is_sax.hpp" />
+    <ClInclude Include="nlohmann\detail\meta\type_traits.hpp" />
+    <ClInclude Include="nlohmann\detail\meta\void_t.hpp" />
+    <ClInclude Include="nlohmann\detail\output\binary_writer.hpp" />
+    <ClInclude Include="nlohmann\detail\output\output_adapters.hpp" />
+    <ClInclude Include="nlohmann\detail\output\serializer.hpp" />
+    <ClInclude Include="nlohmann\detail\value_t.hpp" />
+    <ClInclude Include="nlohmann\json.hpp" />
+    <ClInclude Include="nlohmann\json_fwd.hpp" />
+    <ClInclude Include="nlohmann\ordered_map.hpp" />
+    <ClInclude Include="nlohmann\thirdparty\hedley\hedley.hpp" />
+    <ClInclude Include="nlohmann\thirdparty\hedley\hedley_undef.hpp" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx10async.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10core.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10math.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10mesh.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10tex.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11async.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11core.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11tex.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9anim.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9core.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9effect.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9math.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9mesh.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9shader.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9shape.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9tex.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9xof.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\rmxfguid.h" />
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\rmxftmpl.h" />
+    <ClInclude Include="protection\advanced\antidebug.h" />
+    <ClInclude Include="protection\advanced\anti_attach.h" />
+    <ClInclude Include="protection\advanced\anti_crack.hpp" />
+    <ClInclude Include="protection\advanced\anti_dump.h" />
+    <ClInclude Include="protection\advanced\anti_inject.h" />
+    <ClInclude Include="protection\advanced\crypted.h" />
+    <ClInclude Include="protection\advanced\EnigmaSDK.h" />
+    <ClInclude Include="protection\advanced\Fatal Security.hpp" />
+    <ClInclude Include="protection\advanced\keygen64.h" />
+    <ClInclude Include="protection\advanced\killprocess.h" />
+    <ClInclude Include="protection\advanced\lazy.h" />
+    <ClInclude Include="protection\advanced\mutators.h" />
+    <ClInclude Include="protection\advanced\ntapi.h" />
+    <ClInclude Include="protection\advanced\obsidium.h" />
+    <ClInclude Include="protection\advanced\obsidium64.h" />
+    <ClInclude Include="protection\advanced\process.hpp" />
+    <ClInclude Include="protection\advanced\protect.h" />
+    <ClInclude Include="protection\advanced\skStr.h" />
+    <ClInclude Include="protection\advanced\slowdown.h" />
+    <ClInclude Include="protection\advanced\spoof.h" />
+    <ClInclude Include="protection\advanced\srungoat.h" />
+    <ClInclude Include="protection\advanced\string_encr.h" />
+    <ClInclude Include="protection\advanced\ThemidaSDK.h" />
+    <ClInclude Include="protection\advanced\XynnaCore Security.hpp" />
+    <ClInclude Include="protection\advanced_protection.hpp" />
+    <ClInclude Include="protection\AntiTamper\AntiTamperLib.h" />
+    <ClInclude Include="protection\anti_inject.h" />
+    <ClInclude Include="protection\Backend\Backend.h" />
+    <ClInclude Include="protection\clean.h" />
+    <ClInclude Include="protection\cleaner_data.h" />
+    <ClInclude Include="protection\custom_protect.h" />
+    <ClInclude Include="protection\cv\Via ASM module\VirtualizerSDKCustomVMsMacros.h" />
+    <ClInclude Include="protection\cv\Via ASM module\VirtualizerSDKMacros.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_BorlandC_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_BorlandC_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_GNU_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_ICL_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_LCC_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_VC_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_GNU_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_ICL_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_LCC_inline.h" />
+    <ClInclude Include="protection\cv\VirtualizerSDK_VC_inline.h" />
+    <ClInclude Include="protection\discord.h" />
+    <ClInclude Include="protection\dump_protect\bytes.hpp" />
+    <ClInclude Include="protection\dump_protect\FileLoader.hpp" />
+    <ClInclude Include="protection\dump_protect\ILoader.hpp" />
+    <ClInclude Include="protection\dump_protect\MemoryLoader.hpp" />
+    <ClInclude Include="protection\dump_protect\ProcessHollower.hpp" />
+    <ClInclude Include="protection\dump_protect\protection.h" />
+    <ClInclude Include="protection\EnigmaSDK.h" />
+    <ClInclude Include="protection\junk_engine.h" />
+    <ClInclude Include="protection\KeyAuthProtection.hpp" />
+    <ClInclude Include="protection\log.h" />
+    <ClInclude Include="protection\mutators.h" />
+    <ClInclude Include="protection\ObsidiumSDK.h" />
+    <ClInclude Include="protection\obsidium\obsidium.h" />
+    <ClInclude Include="protection\obsidium\obsidium64.h" />
+    <ClInclude Include="protection\oxorany.h" />
+    <ClInclude Include="protection\pe_defs.h" />
+    <ClInclude Include="protection\protection.h" />
+    <ClInclude Include="protection\refo_v2\encryption\xor.h" />
+    <ClInclude Include="protection\refo_v2\misc\lazy.h" />
+    <ClInclude Include="protection\refo_v2\process.hpp" />
+    <ClInclude Include="protection\security.hpp" />
+    <ClInclude Include="protection\security_error.hpp" />
+    <ClInclude Include="protection\security_macros.h" />
+    <ClInclude Include="protection\security_utils.h" />
+    <ClInclude Include="protection\ThemidaSDK.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_BorlandC_inline.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_GNU_inline.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_ICL_inline.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_LCC_inline.h" />
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_VC_inline.h" />
+    <ClInclude Include="protection\themida\ThemidaSDK.h" />
+    <ClInclude Include="protection\themida\Via ASM module\SecureEngineCustomVMsMacros.h" />
+    <ClInclude Include="protection\themida\Via ASM module\SecureEngineMacros.h" />
+    <ClInclude Include="protection\vmp\VMProtectDDK.h" />
+    <ClInclude Include="protection\vmp\VMProtectSDK.h" />
+    <ClInclude Include="protection\xorstr.hpp" />
+    <ClInclude Include="source\actorloop.h" />
+    <ClInclude Include="source\driver.h" />
+    <ClInclude Include="source\drawing.h" />
+    <ClInclude Include="source\gui\gui.h" />
+    <ClInclude Include="source\gui\gui_colors.h" />
+    <ClInclude Include="source\gui\gui_font.h" />
+    <ClInclude Include="source\gui\gui_image.h" />
+    <ClInclude Include="source\icons\platform_icons.h" />
+    <ClInclude Include="source\icons\ranked_icons.h" />
+    <ClInclude Include="source\json.hpp" />
+    <ClInclude Include="source\offsets.h" />
+    <ClInclude Include="source\overlay.h" />
+    <ClInclude Include="source\radar\radar.hpp" />
+    <ClInclude Include="source\sdk.h" />
+    <ClInclude Include="source\settings.h" />
+    <ClInclude Include="source\settings_new\settings.hpp" />
+    <ClInclude Include="source\slate\include\animations.hpp" />
+    <ClInclude Include="source\slate\include\code_editor.h" />
+    <ClInclude Include="source\slate\include\draw.h" />
+    <ClInclude Include="source\slate\include\EspPreview.h" />
+    <ClInclude Include="source\slate\include\font.h" />
+    <ClInclude Include="source\slate\include\language.h" />
+    <ClInclude Include="source\slate\include\search.h" />
+    <ClInclude Include="source\slate\include\slate.h" />
+    <ClInclude Include="source\slate\include\style.h" />
+    <ClInclude Include="source\slate\include\types.h" />
+    <ClInclude Include="source\slate\include\unicodes.hpp" />
+    <ClInclude Include="source\slate\include\widgets.h" />
+    <ClInclude Include="source\slate\resources\burbank_font.h" />
+    <ClInclude Include="source\slate\resources\fonts.h" />
+    <ClInclude Include="source\slate\resources\images.h" />
+    <ClInclude Include="source\slavedriver.h" />
+    <ClInclude Include="source\slowdown.h" />
+    <ClInclude Include="source\spectators\spectators.hpp" />
+    <ClInclude Include="source\values\values.hpp" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_freetype.h" />
+    <ClInclude Include="imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="imgui\imgui_impl_win32.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="source\spoof.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="impl\asm\io.asm" />
+    <MASM Include="api\driver\nmi_restoring_assembly.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10math.inl" />
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9math.inl" />
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX_DXGIFormatConvert.inl" />
+    <None Include="protection\advanced\keygen64.dll" />
+    <None Include="protection\advanced\obsidium64.def" />
+    <None Include="protection\advanced\obsidium64.dll" />
+    <MASM Include="protection\cv\Via ASM module\VirtualizerSDKCustomVmMacros.asm" />
+    <MASM Include="protection\cv\Via ASM module\VirtualizerSDKMacros.asm" />
+    <None Include="protection\obsidium\obsidium64.def" />
+    <None Include="protection\obsidium\obsidium64.dll" />
+    <None Include="protection\themida\Via ASM module\SecureEngineCustomVmMacros.inc" />
+    <MASM Include="protection\themida\Via ASM module\SecureEngineMacros.asm" />
+    <MASM Include="protection\vmp\VMProtectMacros.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="protection\advanced\keygen64.lib" />
+    <Library Include="protection\advanced\obsidium64.a" />
+    <Library Include="protection\advanced\obsidium64.lib" />
+    <Library Include="protection\obsidium\obsidium64.lib" />
+    <Library Include="protection\themida\SecureEngineSDK64.lib" />
+    <Library Include="protection\vmp\VMProtectSDK64.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+    <Import Project="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlende(n) Datei(en) herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets'))" />
+  </Target>
+</Project>

@@ -1,0 +1,152 @@
+﻿  driver_um_lib.cpp
+  main.cpp
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(180,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(187,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(209,17): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(214,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(227,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(233,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'api/driver/driver_um_lib.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.cpp(239,13): error C3861: 'LOG_INFO': identifier not found
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.cpp(248,9): error C3861: 'LOG_NEW_LINE': identifier not found
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.cpp(249,9): error C3861: 'LOG_INFO': identifier not found
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.cpp(254,13): error C3861: 'LOG_INFO': identifier not found
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.cpp(256,9): error C3861: 'LOG_NEW_LINE': identifier not found
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(180,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(187,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(209,17): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(214,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(227,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(233,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(99,18): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(103,27): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(103,36): error C3861: 'get_cr3': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(126,41): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(126,50): error C3861: 'get_pid_by_name': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(130,42): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(130,51): error C3861: 'get_cr3': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(154,20): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(154,29): error C3861: 'copy_virtual_memory': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(168,20): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(168,29): error C3861: 'copy_virtual_memory': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(212,36): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(212,45): error C3861: 'get_ldr_data_table_entry_count': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(216,21): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/main.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(216,30): error C3861: 'get_data_table_entry_info': identifier not found
+  (compiling source file 'source/main.cpp')
+  
+  slate.cpp
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(180,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(187,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(209,17): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(214,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(227,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\api\driver\driver_um_lib.hpp(233,13): error C3861: 'LOG_INFO': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(99,18): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(103,27): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(103,36): error C3861: 'get_cr3': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(126,41): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(126,50): error C3861: 'get_pid_by_name': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(130,42): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(130,51): error C3861: 'get_cr3': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(154,20): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(154,29): error C3861: 'copy_virtual_memory': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(168,20): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(168,29): error C3861: 'copy_virtual_memory': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(212,36): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(212,45): error C3861: 'get_ldr_data_table_entry_count': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(216,21): error C2653: 'physmem': is not a class or namespace name
+  (compiling source file 'source/slate/src/slate.cpp')
+  
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\source\driver.h(216,30): error C3861: 'get_data_table_entry_info': identifier not found
+  (compiling source file 'source/slate/src/slate.cpp')
+  

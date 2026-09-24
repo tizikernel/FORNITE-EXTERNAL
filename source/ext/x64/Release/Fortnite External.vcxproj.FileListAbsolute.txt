@@ -1,0 +1,5 @@
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\x64\Release\D3DCompiler_43.dll
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\x64\Release\d3dx9_43.dll
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\x64\Release\d3dx10_43.dll
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\x64\Release\d3dx11_43.dll
+C:\Users\mccal\OneDrive\Desktop\both private sources\source\ext\x64\Release\Fortnite.AF31C548.Up2Date

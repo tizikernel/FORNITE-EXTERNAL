@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{11111111-1111-1111-1111-111111111111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mapper">
+      <UniqueIdentifier>{22222222-2222-2222-2222-222222222222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\source">
+      <UniqueIdentifier>{33333333-3333-3333-3333-333333333333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\auth">
+      <UniqueIdentifier>{44444444-4444-4444-4444-444444444444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imgui">
+      <UniqueIdentifier>{55555555-5555-5555-5555-555555555555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mapper">
+      <UniqueIdentifier>{66666666-6666-6666-6666-666666666666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\source">
+      <UniqueIdentifier>{77777777-7777-7777-7777-777777777777}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="api\driver\driver_um_lib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\intel_driver.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\kdmapper.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\mapper_bridge.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\pdb_offsets.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\portable_executable.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\service.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="mapper\utils.cpp">
+      <Filter>Source Files\mapper</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_freetype.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
+      <Filter>Source Files\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\slate\src\draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\slate\src\search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\slate\src\slate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\slate\src\style.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\slate\src\widgets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\gui.cpp">
+      <Filter>Source Files\source</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\advanced\ntapi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\AntiTamper\AntiTamperLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\Backend\Backend.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\dump_protect\FileLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\dump_protect\MemoryLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="protection\dump_protect\ProcessHollower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\tab_aimbot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="auth\skStr.h">
+      <Filter>Header Files\auth</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\intel_driver.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\intel_driver_resource.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\kdmapper.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\loader_offsets.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\mapper_bridge.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\nt.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\pdb_offsets.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\portable_executable.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\service.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="mapper\includes\utils.hpp">
+      <Filter>Header Files\mapper</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_freetype.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx11.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_win32.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\actorloop.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\drawing.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\driver.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\json.hpp">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\offsets.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\overlay.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\sdk.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slavedriver.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slowdown.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\spoof.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\animations.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\code_editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\EspPreview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\language.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\search.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\slate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\style.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\unicodes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\include\widgets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\resources\fonts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\resources\images.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\radar\radar.hpp">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\gui.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\gui_colors.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\gui_font.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\gui_image.h">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\spectators\spectators.hpp">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\values\values.hpp">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\settings_new\settings.hpp">
+      <Filter>Header Files\source</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\anti_attach.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\anti_crack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\anti_dump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\anti_inject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\antidebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\crypted.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\EnigmaSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\Fatal Security.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\keygen64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\killprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\lazy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\mutators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\ntapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\obsidium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\obsidium64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\process.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\protect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\skStr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\slowdown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\spoof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\srungoat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\string_encr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\ThemidaSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced\XynnaCore Security.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\AntiTamper\AntiTamperLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\Backend\Backend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\Via ASM module\VirtualizerSDKCustomVMsMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\Via ASM module\VirtualizerSDKMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_BorlandC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_BorlandC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_GNU_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_ICL_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_LCC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_CustomVMs_VC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_GNU_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_ICL_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_LCC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cv\VirtualizerSDK_VC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\bytes.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\FileLoader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\ILoader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\MemoryLoader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\ProcessHollower.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\dump_protect\protection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\obsidium\obsidium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\obsidium\obsidium64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\refo_v2\encryption\xor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\refo_v2\misc\lazy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\refo_v2\process.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\Via ASM module\SecureEngineCustomVMsMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\Via ASM module\SecureEngineMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_BorlandC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_GNU_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_ICL_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_LCC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\SecureEngineCustomVMs_VC_inline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\themida\ThemidaSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\vmp\VMProtectDDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\vmp\VMProtectSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\advanced_protection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\anti_inject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\clean.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\cleaner_data.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\custom_protect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\discord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\EnigmaSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\KeyAuthProtection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\mutators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\ObsidiumSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\oxorany.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\protection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\security.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\security_error.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\ThemidaSDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\xorstr.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\junk_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\pe_defs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\security_macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="protection\security_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9anim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9shape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9tex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9xof.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx10async.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10tex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11async.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX11tex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\rmxfguid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\rmxftmpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\conversions\from_json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\conversions\to_chars.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\conversions\to_json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\binary_reader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\input_adapters.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\json_sax.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\lexer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\input\position_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\internal_iterator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\iter_impl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\iteration_proxy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\iterator_traits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\json_reverse_iterator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\iterators\primitive_iterator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\meta\cpp_future.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\meta\detected.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\meta\is_sax.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\meta\type_traits.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\meta\void_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\output\binary_writer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\output\output_adapters.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\output\serializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\exceptions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\hash.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\json_pointer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\json_ref.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\macro_scope.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\macro_unscope.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\detail\value_t.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\thirdparty\hedley\hedley.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\thirdparty\hedley\hedley_undef.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\adl_serializer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\byte_container_with_subtype.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\json_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nlohmann\ordered_map.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\ftconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\ftheader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\ftmodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\ftoption.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\ftstdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\integer-types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\mac-support.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\config\public-macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\freetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftadvanc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftbbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftbdf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftbitmap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftbzip2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftcache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftchapters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftcid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftcolor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftdriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\fterrdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\fterrors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftfntfmt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftgasp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftglyph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftgxval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftgzip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftimage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftincrem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftlcdfil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftlogging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftlzw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftmac.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftmm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftmodapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftmoderr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftotval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftoutln.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftparams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftpfr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftrender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftsizes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftsnames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftstroke.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftsynth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\fttrigon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\fttypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ftwinfnt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\otsvg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\t1tables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\ttnameid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\tttables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\freetype\tttags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="freetype\include\ft2build.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\icons\platform_icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\icons\ranked_icons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\slate\resources\burbank_font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="api\driver\driver_um_lib.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="protection\advanced\obsidium64.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="protection\obsidium\obsidium64.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="protection\themida\Via ASM module\SecureEngineCustomVmMacros.inc">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="protection\advanced\keygen64.dll" />
+    <None Include="protection\advanced\obsidium64.dll" />
+    <None Include="protection\obsidium\obsidium64.dll" />
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX_DXGIFormatConvert.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\d3dx9math.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\include\D3DX10math.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="protection\advanced\keygen64.lib" />
+    <Library Include="protection\advanced\obsidium64.lib" />
+    <Library Include="protection\advanced\obsidium64.a" />
+    <Library Include="protection\obsidium\obsidium64.lib" />
+    <Library Include="protection\themida\SecureEngineSDK64.lib" />
+    <Library Include="protection\vmp\VMProtectSDK64.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="api\driver\nmi_restoring_assembly.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="protection\cv\Via ASM module\VirtualizerSDKCustomVmMacros.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="protection\cv\Via ASM module\VirtualizerSDKMacros.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="protection\themida\Via ASM module\SecureEngineMacros.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="protection\vmp\VMProtectMacros.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="impl\asm\io.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+  </ItemGroup>
+</Project>
