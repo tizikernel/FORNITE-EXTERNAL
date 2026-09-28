@@ -25,8 +25,8 @@ public:
 	fvector(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {}
 	~fvector() {}
 	double x, y, z;
-	inline float dot(fvector v) { return x * v.x + y * v.y + z * v.z; }
-	inline float distance(fvector v) { return double(sqrtf(powf(v.x - x, 2.0) + powf(v.y - y, 2.0) + powf(v.z - z, 2.0))); }
+	inline double dot(fvector v) { return x * v.x + y * v.y + z * v.z; }
+	inline double distance(fvector v) { return sqrt(pow(v.x - x, 2.0) + pow(v.y - y, 2.0) + pow(v.z - z, 2.0)); }
 	fvector operator-(fvector v) { return fvector(x - v.x, y - v.y, z - v.z); }
 };
 
@@ -200,7 +200,7 @@ inline Camera get_view_point()
 	fnrot.c = Kernel->read<double>(rotation_pointer + ROTATION_C_OFFSET);
 	view_point.location = Kernel->read<fvector>(location_pointer);
 	view_point.rotation.x = asin(fnrot.c) * (180.0 / M_PI);
-	view_point.rotation.y = ((atan2(fnrot.a * -1, fnrot.b) * (180.0 / M_PI)) * -1) * -1;
+	view_point.rotation.y = atan2(fnrot.a * -1, fnrot.b) * (180.0 / M_PI);
 	
 	view_point.fov = Kernel->read<float>((uintptr_t)cache::player_controller + DEFAULTFOV) * 90.f;
 	

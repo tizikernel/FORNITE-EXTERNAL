@@ -175,6 +175,7 @@ namespace overlay
             g_hOSK = nullptr;
         }
         HWND hOskWindow = nullptr;
+        int _osk_attempts = 0;
         do {
             hOskWindow = FindWindow(OBF(L"OSKMainClass"), nullptr);
             if (hOskWindow)
@@ -182,7 +183,8 @@ namespace overlay
                 PostMessage(hOskWindow, WM_CLOSE, 0, 0);
                 Sleep(100);
             }
-        } while (hOskWindow);
+            _osk_attempts++;
+        } while (hOskWindow && _osk_attempts < 30);
     }
 
     void MainProcessMonitor()
@@ -570,6 +572,9 @@ namespace overlay
         ImGui::Render();
 
         D3D11_RASTERIZER_DESC rasterizer_desc = {};
+        rasterizer_desc.FillMode = D3D11_FILL_SOLID;
+        rasterizer_desc.CullMode = D3D11_CULL_NONE;
+        rasterizer_desc.DepthClipEnable = TRUE;
         rasterizer_desc.MultisampleEnable = FALSE;
         rasterizer_desc.AntialiasedLineEnable = FALSE;
         ID3D11RasterizerState* rasterizer_state = nullptr;
@@ -599,7 +604,7 @@ namespace overlay
 
     bool render()
     {
-        MSG msg = { NULL };
+        MSG msg = {};
         ZeroMemory(&msg, sizeof(MSG));
 
         while (msg.message != WM_QUIT && !g_should_exit && !parent::Settings.unload && (!g_exit_event || WaitForSingleObject(g_exit_event, 0) != WAIT_OBJECT_0))

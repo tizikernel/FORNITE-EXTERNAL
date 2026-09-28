@@ -9,14 +9,14 @@ namespace parent {
 		bool box = 1;
 		bool box_outline = 1;
 		int box_type = 0;
-		bool custom_box_color;
+		bool custom_box_color = false;
 		float box_thickness = 1.5f;
 
 		//skeleton
 		bool skeleton = 1;
 		bool skeleton_outline = 1;
 		float skeleton_thickness = 1.5f;
-		bool custom_skeleton_color;
+		bool custom_skeleton_color = false;
 		int skeleton_type;
 		bool curved_skeleton = false;
 		bool GlowBones = false;
@@ -24,27 +24,27 @@ namespace parent {
 		bool head_circle = false;
 		float head_circle_size = 1.0f;
 
-		bool default_outline_colors;
-		bool custom_outline;
+		bool default_outline_colors = false;
+		bool custom_outline = false;
 
 		//visuals
-		bool rank;
-		bool level;
-		bool kills;
-		bool weapon;
-		bool ammo;
-		bool rarity;
-		bool distance;
-		bool username;
-		bool teamid;
-		bool teamsize;
-		bool platform;
+		bool rank = true;
+		bool level = false;
+		bool kills = false;
+		bool weapon = false;
+		bool ammo = false;
+		bool rarity = false;
+		bool distance = false;
+		bool username = false;
+		bool teamid = false;
+		bool teamsize = false;
+		bool platform = true;
 		float visuals_distance = 500.0f;
 		bool filled_fov;
 		bool snapline;
 		bool custom_snapline_color;
 		bool snapline_outline;
-		float snapline_thickness;
+		float snapline_thickness = 1.0f;
 		int snapline_pos = 1;
 
 		bool customcolor;
@@ -106,7 +106,7 @@ namespace parent {
 		float aimbot_distance = 200.0f; // meters
 		bool aimbot_config_on_spectate = false;
 		bool aimbot_prediction = false;
-		bool stream_proof;
+		bool stream_proof = false;
 
 		//world
 		bool loot_esp = false;

@@ -22,7 +22,7 @@ void c_draw::gradient( ImDrawList* draw, ImVec2 start, ImVec2 end, ImColor col1,
             ImVec4 up_right = ImGui::ColorConvertU32ToFloat4( col2 );
             ImVec4 bot_right = ImGui::ColorConvertU32ToFloat4( col3 );
 
-            float X = ImClamp((vert->pos.x - start.x) / (end.x - start.x), 0.0f, 1.0f);
+            float _dX = (end.x - start.x); float X = (_dX != 0.f) ? ImClamp((vert->pos.x - start.x) / _dX, 0.0f, 1.0f) : 0.f;
 
             // 4 colors - 8 deltas
 
@@ -39,7 +39,7 @@ void c_draw::gradient( ImDrawList* draw, ImVec2 start, ImVec2 end, ImColor col1,
             float a2 = bot_left.w + (bot_right.w - bot_left.w) * X;
 
 
-            float Y = ImClamp((vert->pos.y - start.y) / (end.y - start.y), 0.0f, 1.0f);
+            float _dY = (end.y - start.y); float Y = (_dY != 0.f) ? ImClamp((vert->pos.y - start.y) / _dY, 0.0f, 1.0f) : 0.f;
             float r = r1 + (r2 - r1) * Y;
             float g = g1 + (g2 - g1) * Y;
             float b = b1 + (b2 - b1) * Y;
@@ -86,11 +86,12 @@ ImVec2 c_draw::rotationcenter( )
 void c_draw::rotateend( float rad, ImVec2 center )
 {
     float s = sin( rad ), c = cos( rad );
-    center = ImRotate( center, s, c) - center;
+    ImVec2 _rotated_center = ImRotate( center, s, c );
+    ImVec2 _delta = _rotated_center - center;
 
     auto& buf = GetWindowDrawList()->VtxBuffer;
     for ( int i = rotation_start_index; i < buf.Size; i++ )
-        buf[i].pos = ImRotate( buf[i].pos, s, c ) - center;
+        buf[i].pos = ImRotate( buf[i].pos, s, c ) - _delta;
 }
 
 void c_draw::text( int font, float fontsize, ImVec2 pos, pcolor col, std::string_view text, bool shadow, ImDrawList* draw ) {
