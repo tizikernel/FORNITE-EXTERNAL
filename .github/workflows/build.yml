@@ -27,6 +27,7 @@ jobs:
           name: Fortnite-External-Release
           path: |
             source/x64/Release/*.exe
+            source/x64/Release/CinderMapper.exe
             source/x64/Release/*.dll
             source/ext/x64/Release/*.exe
           if-no-files-found: warn
