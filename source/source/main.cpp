@@ -122,8 +122,16 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
                 SetConsoleColor(4);
                 std::cout << "\n  [!] ";
                 SetConsoleColor(7);
-                std::cout << "Driver mapping failed";
-                MessageBoxA(0, "The mapper could not load the API driver.", "INFO", 0);
+                std::cout << "Driver mapping failed (exit=0x" << std::hex << (unsigned)mapper_exit << std::dec << ")";
+                std::cout << "\n  [!] See mapper_log.txt next to Loader.exe";
+                {
+                    std::ofstream lf("mapper_log.txt", std::ios::app);
+                    if (lf) {
+                        lf << "[main] map_driver failed exit=0x" << std::hex << (unsigned)mapper_exit << std::dec << std::endl;
+                        lf << "[main] Check: run as Admin | Memory Integrity OFF | Secure Boot OFF | Defender exclusion" << std::endl;
+                    }
+                }
+                MessageBoxA(0, "Mapper failed. Open mapper_log.txt next to Loader.exe for details.", "INFO", 0);
                 Sleep(3500);
                 system("cls");
                 //std::cout << "Bytes Mapping Failed. Running Online Payload:";
