@@ -5,6 +5,7 @@ stack_id qword 0deedh
 
 extern nmi_restoring:proc
 extern NtUserGetCPD:qword
+extern Win11HookFunc:qword
 
 save_general_regs macro
 	push rsp
@@ -52,12 +53,11 @@ asm_nmi_restoring proc
     mov rcx, rsp
 
 	sub rsp, 40h
-    call nmi_restoring ; Loads info from the nmi info struct and restores rsp and recursively calls the target function again
+    call nmi_restoring
 	add rsp, 40h
 
 	restore_general_regs
 
-	; the c handler set up the stack for us to be just able to return
 	ret
 asm_nmi_restoring endp
 
@@ -69,22 +69,6 @@ asm_call_driver proc
 
 	ret
 asm_call_driver endp
-
-end
-; Win11 23H2+ path: 2-arg hook (a1=cmd, a2=signature), third arg unused here
-; Signature in C: asm_call_driver_win11(a1, a2, nmi_restoring_addr)
-extern Win11HookFunc:qword
-
-asm_call_driver_win11 proc
-	push qword ptr [stack_id]
-	; RCX = a1 (cmd), RDX = a2 (signature) already set by caller
-	call qword ptr [Win11HookFunc]
-	add rsp, 8h
-	ret
-asm_call_driver_win11 endp
-
-
-extern Win11HookFunc:qword
 
 asm_call_driver_win11 proc
 	push qword ptr [stack_id]
