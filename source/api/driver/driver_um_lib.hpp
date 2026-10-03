@@ -203,7 +203,7 @@ namespace rose {
             // Win11 23H2+: resolve the function that triggers the gSessionGlobalSlots table entry.
             // The hooked entry at table[0xA00/8] corresponds to NtUserGetCPD on Win11 23H2+
             // but is dispatched through the session global slots mechanism with a 2-arg signature.
-            // We still call NtUserGetCPD from usermode — the syscall routing reaches the hooked entry.
+            // We still call NtUserGetCPD from usermode Â— the syscall routing reaches the hooked entry.
             uint64_t handler_address = (uint64_t)GetProcAddress(win32u, "NtUserGetCPD");
             if (!handler_address) {
                 LOG_INFO("Failed to resolve NtUserGetCPD for Win11 path");
@@ -281,3 +281,41 @@ struct trap_frame_t {
     uint64_t rsp; ///< Value of the RSP register.
 };
 #pragma pack(pop)
+
+
+// Compatibility alias used by source/driver.h
+namespace physmem {
+    inline bool init_driver() {
+        return rose::init_roseware_lib();
+    }
+    inline bool copy_virtual_memory(uint64_t src_cr3, uint64_t dst_cr3, void* src, void* dst, uint64_t size) {
+        return rose::copy_virtual_memory(src_cr3, dst_cr3, src, dst, size);
+    }
+    inline uint64_t get_cr3(uint64_t pid) {
+        return rose::get_cr3(pid);
+    }
+    inline uint64_t get_pid_by_name(const char* name) {
+        return rose::get_pid_by_name(name);
+    }
+    inline uint64_t get_module_base(const char* module_name, uint64_t pid) {
+        return rose::get_module_base(module_name, pid);
+    }
+    inline uint64_t get_module_size(const char* module_name, uint64_t pid) {
+        return rose::get_module_size(module_name, pid);
+    }
+    inline uint64_t get_ldr_data_table_entry_count(uint64_t pid) {
+        return rose::get_ldr_data_table_entry_count(pid);
+    }
+    inline bool get_data_table_entry_info(uint64_t pid, module_info_t* info_array) {
+        return rose::get_data_table_entry_info(pid, info_array);
+    }
+    inline bool hide_driver() {
+        return rose::hide_driver();
+    }
+    inline bool unload_driver() {
+        return rose::unload_driver();
+    }
+    inline bool ping_driver() {
+        return rose::ping_driver();
+    }
+}
