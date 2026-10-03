@@ -107,7 +107,11 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
     SetConsoleColor(10);
     std::cout << "\n  [+] ";
     SetConsoleColor(7);
-    std::cout << "Initializing driver...";
+    std::cout << "Initializing driver... [BUILD_MARK_CINDER_1845]";
+    {
+        std::ofstream lf("mapper_log.txt", std::ios::app);
+        if (lf) lf << "[BUILD_MARK_CINDER_1845] binary watermark\n";
+    }
 
     try {
         if (!Kernel->init_driver())
