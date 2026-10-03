@@ -103,10 +103,19 @@ namespace mapper_bridge
         }
         log_line("pdb offsets OK");
 
-        log_line("loading intel vulnerable driver...");
-        if (!intel_driver::Load()) {
-            log_line("FAIL: intel_driver::Load() failed");
-            log_line("  possible causes: not admin | HVCI/Memory Integrity ON | Secure Boot | AV blocked | intel driver blocked by MS");
+        log_line("calling intel_driver::Load() NOW");
+        {
+            std::ofstream f2("C:\\mapper_debug.txt", std::ios::app);
+            if (f2) f2 << "before Load\n";
+        }
+        const bool load_ok = intel_driver::Load();
+        {
+            std::ofstream f2("C:\\mapper_debug.txt", std::ios::app);
+            if (f2) f2 << "after Load ok=" << (load_ok ? 1 : 0) << "\n";
+        }
+        log_line(std::string("intel_driver::Load returned ") + (load_ok ? "TRUE" : "FALSE"));
+        if (!load_ok) {
+            log_line("FAIL: intel_driver::Load returned false — see lines above from intel (Load enter / NtLoadDriver Status)");
             return false;
         }
         log_line("intel_driver::Load OK");
