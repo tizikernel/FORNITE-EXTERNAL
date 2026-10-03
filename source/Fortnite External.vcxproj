@@ -49,12 +49,12 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)source;$(ProjectDir)api\driver;$(ProjectDir)mapper\includes;$(ProjectDir)source\gui;$(ProjectDir)source\radar;$(ProjectDir)source\settings_new;$(ProjectDir)source\slate\include;$(ProjectDir)source\spectators;$(ProjectDir)source\values;$(ProjectDir)auth;$(ProjectDir)imgui;$(ProjectDir)freetype\include;$(ProjectDir)nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)auth;$(ProjectDir)freetype\win64;$(LibraryPath)</LibraryPath>
-    <TargetName>CinderMapper</TargetName>
+    <TargetName>Loader</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir);$(ProjectDir)source;$(ProjectDir)api\driver;$(ProjectDir)mapper\includes;$(ProjectDir)source\gui;$(ProjectDir)source\radar;$(ProjectDir)source\settings_new;$(ProjectDir)source\slate\include;$(ProjectDir)source\spectators;$(ProjectDir)source\values;$(ProjectDir)auth;$(ProjectDir)imgui;$(ProjectDir)freetype\include;$(ProjectDir)nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)auth;$(ProjectDir)freetype\win64;$(LibraryPath)</LibraryPath>
-    <TargetName>CinderMapper</TargetName>
+    <TargetName>Loader</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
