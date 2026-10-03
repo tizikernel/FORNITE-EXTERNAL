@@ -16,6 +16,7 @@
 #include <chrono>
 #include <algorithm>
 #include <utility>
+#include <regex>
 
 // --- MISSING WININET HEADERS ADDED HERE ---
 #include <wininet.h>
@@ -179,8 +180,8 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
                 Sleep(800);
             }
             else {
-                // Attach succeeded. 
-                // It's safest to explicitly break out of the loop here rather 
+                // Attach succeeded.
+                // It's safest to explicitly break out of the loop here rather
                 // than relying entirely on m_process_id updating synchronously,
                 // which prevents potential infinite CPU spinning.
                 break;
@@ -238,12 +239,13 @@ void RandomTitleThread() {
     }
 }
 
-// --- AUTO LOGIN SYSTEM ---
+// --- BACKEND KEY AUTHENTICATION ---
+namespace {
 std::string GetConfigPath() {
     char* appdata = nullptr;
     size_t len = 0;
-    _dupenv_s(&appdata, &len, "APPDATA"); // Gets the C:\Users\Username\AppData\Roaming folder safely
-    std::string path = "loader_auth.txt"; // Fallback to current folder if AppData fails
+    _dupenv_s(&appdata, &len, "APPDATA");
+    std::string path = "loader_auth.txt";
     if (appdata != nullptr) {
         path = std::string(appdata) + "\\loader_auth.txt";
         free(appdata);
@@ -251,31 +253,109 @@ std::string GetConfigPath() {
     return path;
 }
 
-bool LoadAuth(std::string& discordId, std::string& licenseKey) {
+bool LoadAuth(std::string& licenseKey) {
     std::ifstream file(GetConfigPath());
-    if (file.is_open()) {
-        std::getline(file, discordId);
-        std::getline(file, licenseKey);
-        file.close();
-        return (!discordId.empty() && !licenseKey.empty());
-    }
-    return false;
+    if (!file.is_open()) return false;
+
+    // Accept the previous two-line cache format, but only retain the key.
+    std::string firstLine, secondLine;
+    std::getline(file, firstLine);
+    std::getline(file, secondLine);
+    licenseKey = secondLine.empty() ? firstLine : secondLine;
+    return !licenseKey.empty();
 }
 
-void SaveAuth(const std::string& discordId, const std::string& licenseKey) {
-    std::ofstream file(GetConfigPath());
-    if (file.is_open()) {
-        file << discordId << "\n" << licenseKey;
-        file.close();
+void SaveAuth(const std::string& licenseKey) {
+    std::ofstream file(GetConfigPath(), std::ios::trunc);
+    if (file.is_open()) file << licenseKey;
+}
+
+std::string BuildDeviceFingerprint() {
+    char computerName[MAX_COMPUTERNAME_LENGTH + 1] = {};
+    DWORD computerNameLength = _countof(computerName);
+    if (!GetComputerNameA(computerName, &computerNameLength)) {
+        strcpy_s(computerName, "unknown-pc");
     }
+
+    char username[256] = {};
+    DWORD usernameLength = _countof(username);
+    if (!GetUserNameA(username, &usernameLength)) {
+        strcpy_s(username, "unknown-user");
+    }
+
+    // The backend hashes this stable client identifier before storing it.
+    return std::string("fornite:") + computerName + ":" + username;
+}
+
+int ValidateAccessKey(const std::string& licenseKey, std::string& failureReason) {
+    HINTERNET session = InternetOpenA("UNKNOWN TEAM FORNITE Client", INTERNET_OPEN_TYPE_PRECONFIG, nullptr, nullptr, 0);
+    if (!session) {
+        failureReason = "network_error";
+        return 0;
+    }
+
+    HINTERNET connection = InternetConnectA(session, "key-admin-console.onrender.com", INTERNET_DEFAULT_HTTPS_PORT, nullptr, nullptr, INTERNET_SERVICE_HTTP, 0, 0);
+    if (!connection) {
+        InternetCloseHandle(session);
+        failureReason = "network_error";
+        return 0;
+    }
+
+    HINTERNET request = HttpOpenRequestA(connection, "POST", "/api/validate", nullptr, nullptr,
+        nullptr, INTERNET_FLAG_SECURE | INTERNET_FLAG_NO_CACHE_WRITE | INTERNET_FLAG_RELOAD, 0);
+    if (!request) {
+        InternetCloseHandle(connection);
+        InternetCloseHandle(session);
+        failureReason = "network_error";
+        return 0;
+    }
+
+    const std::string fingerprint = BuildDeviceFingerprint();
+    const std::string body = "{\"product\":\"FORNITE\",\"keyCode\":\"" + licenseKey +
+        "\",\"deviceFingerprint\":\"" + fingerprint +
+        "\",\"deviceLabel\":\"FORNITE CLIENT\"}";
+    const char headers[] = "Content-Type: application/json\r\nAccept: application/json\r\n";
+
+    bool sent = HttpSendRequestA(request, headers, -1L,
+        const_cast<char*>(body.data()), static_cast<DWORD>(body.size())) != FALSE;
+    std::string responseBody;
+    if (sent) {
+        char buffer[1024];
+        DWORD bytesRead = 0;
+        while (InternetReadFile(request, buffer, sizeof(buffer), &bytesRead) && bytesRead > 0) {
+            responseBody.append(buffer, bytesRead);
+        }
+    }
+
+    InternetCloseHandle(request);
+    InternetCloseHandle(connection);
+    InternetCloseHandle(session);
+
+    if (!sent || responseBody.empty()) {
+        failureReason = "network_error";
+        return 0;
+    }
+
+    std::smatch reasonMatch;
+    std::regex reasonRegex("\\\"reason\\\"\\s*:\\s*\\\"([^\\\"]+)\\\"");
+    if (std::regex_search(responseBody, reasonMatch, reasonRegex) && reasonMatch.size() > 1) {
+        failureReason = reasonMatch[1].str();
+    }
+
+    if (responseBody.find("\"valid\":true") != std::string::npos ||
+        responseBody.find("\"valid\": true") != std::string::npos) {
+        return 1;
+    }
+    if (failureReason == "expired") return 2;
+    if (failureReason == "device_mismatch" || failureReason == "device_already_bound") return 3;
+    return 0;
+}
 }
 // -------------------------
 
 int main(int, char**)
 {
     SPOOF_FUNC;
-    std::string discordID = "1512923745139036265";
-    std::string serverID = "1508943708673015858";
     // --- Unified Security Initialization ---
     g_SecurityAlertHook = [](const std::string& msg) {
         trigger_protection_alert(msg, ("Zenith"));
@@ -325,34 +405,25 @@ int main(int, char**)
         SetConsoleColor(7);
         std::cout << ("Initializing, Doing Auth Checks....\n");
 
-        // --- UPDATED AUTO-LOGIN CREDENTIAL CHECK ---
-        std::string discordId, licenseKey;
+        // --- BACKEND KEY LOGIN ---
+        std::string licenseKey;
         bool autoLoginSuccess = false;
 
-        if (LoadAuth(discordId, licenseKey)) {
+        if (LoadAuth(licenseKey)) {
             SetConsoleColor(10);
             std::cout << "  [+] ";
             SetConsoleColor(7);
-            std::cout << "Saved credentials found! Attempting auto-login...\n";
-
-            int authResult = 0;
-            if (authResult == 1) {
-                autoLoginSuccess = true;
-            }
-            else {
+            std::cout << "Saved key found! Validating with backend...\n";
+            std::string failureReason;
+            autoLoginSuccess = ValidateAccessKey(licenseKey, failureReason) == 1;
+            if (!autoLoginSuccess) {
                 SetConsoleColor(4);
-                std::cout << "  [!] Auto-login failed (Key expired or invalid). Please enter manually.\n";
+                std::cout << "  [!] Saved key rejected (" << failureReason << "). Please enter it again.\n";
                 SetConsoleColor(7);
             }
         }
 
         if (!autoLoginSuccess) {
-            SetConsoleColor(10);
-            std::cout << "  [+] ";
-            SetConsoleColor(7);
-            std::cout << "Enter Discord ID: ";
-            std::cin >> discordId;
-
             SetConsoleColor(10);
             std::cout << "  [+] ";
             SetConsoleColor(7);
@@ -362,30 +433,29 @@ int main(int, char**)
             SetConsoleColor(10);
             std::cout << "\n  [+] ";
             SetConsoleColor(7);
-            std::cout << "Verifying License with Server...";
+            std::cout << "Verifying key with UNKNOWN TEAM backend...";
 
-            // Run the check!
-            int authResult = 0;
-
+            std::string failureReason;
+            const int authResult = ValidateAccessKey(licenseKey, failureReason);
             if (authResult == 0) {
                 SetConsoleColor(4);
-                std::cout << "\n  [!] Invalid Discord ID or License Key! Exiting...\n";
+                std::cout << "\n  [!] Invalid key or backend unavailable (" << failureReason << "). Exiting...\n";
                 SetConsoleColor(7);
                 Sleep(3000);
                 exit(1);
             }
             else if (authResult == 2) {
                 SetConsoleColor(4);
-                std::cout << "\n  [!] Your License Key has EXPIRED! Exiting...\n";
+                std::cout << "\n  [!] Your key has EXPIRED! Exiting...\n";
                 SetConsoleColor(7);
                 Sleep(3000);
                 exit(1);
             }
             else if (authResult == 3) {
                 SetConsoleColor(4);
-                std::cout << "\n  [!] VPN/PROXY DETECTED! Please disable your VPN to use this software.\n";
+                std::cout << "\n  [!] This key is already bound to another device. Exiting...\n";
                 SetConsoleColor(7);
-                Sleep(4000);
+                Sleep(3000);
                 exit(1);
             }
         }
@@ -394,7 +464,7 @@ int main(int, char**)
         std::cout << "\n  [+] ";
         SetConsoleColor(7);
         std::cout << "License Verified Successfully!\n";
-        SaveAuth(discordId, licenseKey);
+        SaveAuth(licenseKey);
         Sleep(1000);
 
         //if (!IsCommitPublic("mccalljrpatrick789-ux", "TempAuth", "ba7d23ac702268e3b2b81d5170a8205db7f529b1")) {

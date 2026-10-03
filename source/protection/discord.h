@@ -184,29 +184,18 @@ inline bool FetchDiscordIdFromIPC() {
     return false;
 }
 
-// Attempt to resolve the Discord user ID via the local Discord RPC pipe.
-// Discord exposes a local IPC server on \\.\pipe\discord-ipc-0 through \\.\pipe\discord-ipc-9.
-// We try each pipe; if one connects, we do a handshake + GET_USERS request.
-// However, this requires a registered Discord RPC client_id, which we may not have.
-//
-// FALLBACK: We read the Windows username and the KeyAuth username to build a log identity.
-// The caller should set g_discordUsername and g_discordId from KeyAuth's user_data.discord field
-// AFTER a successful login, using SetDiscordIdentity().
-
-inline void SetDiscordIdentity(const std::string& keyauth_username, const std::string& discord_id) {
+// Legacy identity compatibility helpers retained for existing UI call sites.
+// Authentication and access control are handled exclusively by the UNKNOWN TEAM backend.
+inline void SetDiscordIdentity(const std::string& backend_username, const std::string&) {
+    // Compatibility shim: authentication is now handled by the UNKNOWN TEAM backend.
+    // No Discord identifier is read, required, or persisted for login.
     try {
-        if (!discord_id.empty() && discord_id.length() < 64) { 
-            g_discordId = discord_id;
-            g_discordUsername = "<@" + discord_id + ">";
-        }
-        else {
-            g_discordId = "";
-            g_discordUsername = keyauth_username.empty() ? "Unknown" : keyauth_username;
-        }
+        g_discordId.clear();
+        g_discordUsername = backend_username.empty() ? "UNKNOWN TEAM user" : backend_username;
         g_discordInitialized = true;
         SaveIdentity(g_discordUsername, g_discordId);
     }
-    catch (...) {} 
+    catch (...) {}
 }
 
 // Legacy compatibility — returns the formatted mention or fallback name
@@ -225,36 +214,17 @@ inline std::pair<bool, std::string> InitializeDiscord(std::string& currentUserna
 
 inline void InitializeDiscordFallback() {
     if (g_discordInitialized) return;
-    
-    // 1. Try to fetch directly from running Discord instance (REAL-TIME)
-    if (FetchDiscordIdFromIPC()) {
-        SaveIdentity(g_discordUsername, g_discordId);
-        return;
-    }
 
-    // 2. Try to fetch from Disk/Registry (USER PROVIDED LOGIC)
-    std::string diskId = GetDiscordUserIdFromDisk();
-    if (!diskId.empty()) {
-        g_discordId = diskId;
-        g_discordUsername = "<@" + diskId + ">";
-        g_discordInitialized = true;
-        SaveIdentity(g_discordUsername, g_discordId);
-        return;
-    }
-
-    // 3. Try to load from ProgramData (CACHE)
+    // Login no longer depends on Discord IPC, files, registry, or local Discord caches.
     LoadIdentity();
     if (g_discordInitialized) return;
 
-    // 4. Last fallback: Windows username
-    char username[256];
-    DWORD username_len = 256;
-    if (GetUserNameA(username, &username_len)) {
-        g_discordUsername = std::string(username);
-    }
-    else {
-        g_discordUsername = "Unknown";
-    }
+    char username[256] = {};
+    DWORD username_len = _countof(username);
+    g_discordUsername = GetUserNameA(username, &username_len)
+        ? std::string(username)
+        : "UNKNOWN TEAM user";
+    g_discordId.clear();
     g_discordInitialized = true;
 }
 
