@@ -5,23 +5,6 @@
 
 #include "includes/utils.hpp"
 #include "includes/nt.hpp"
-#include <fstream>
-
-static void file_log_nt(const char* msg, long status) {
-    char path[MAX_PATH]{};
-    GetModuleFileNameA(nullptr, path, MAX_PATH);
-    std::string p(path);
-    auto pos = p.find_last_of("\\/");
-    if (pos != std::string::npos) p = p.substr(0, pos + 1);
-    p += "mapper_log.txt";
-    std::ofstream f(p, std::ios::app);
-    if (!f) return;
-    SYSTEMTIME st{}; GetLocalTime(&st);
-    char ts[64]; sprintf_s(ts, "[%02d:%02d:%02d] ", st.wHour, st.wMinute, st.wSecond);
-    f << ts << msg << " 0x" << std::hex << (unsigned long)status << std::dec << std::endl;
-}
-#include <fstream>
-
 
 bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstring& serviceName) {
 	const static DWORD ServiceTypeKernel = 1;
@@ -31,14 +14,14 @@ bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstri
 	HKEY dservice;
 	LSTATUS status = RegCreateKeyW(HKEY_LOCAL_MACHINE, servicesPath.c_str(), &dservice); 
 	if (status != ERROR_SUCCESS) {
-		Log("[-] Can't create service key LSTATUS=" << status << " GetLastError=" << GetLastError() << std::endl);
+		Log("[-] Can't create service key" << std::endl);
 		return false;
 	}
 
 	status = RegSetKeyValueW(dservice, NULL, L"ImagePath", REG_EXPAND_SZ, nPath.c_str(), (DWORD)(nPath.size()*sizeof(wchar_t)));
 	if (status != ERROR_SUCCESS) {
 		RegCloseKey(dservice);
-		Log("[-] Can't create 'ImagePath' registry value LSTATUS=" << status << std::endl);
+		Log("[-] Can't create 'ImagePath' registry value" << std::endl);
 		return false;
 	}
 	
@@ -72,7 +55,7 @@ bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstri
 	RtlInitUnicodeString(&serviceStr, wdriver_reg_path.c_str());
 
 	Status = nt::NtLoadDriver(&serviceStr);
-	file_log_nt("NtLoadDriver Status", Status);
+
 	Log("[+] NtLoadDriver Status 0x" << std::hex << Status << std::endl);
 
 	if (Status == STATUS_IMAGE_CERT_REVOKED) {
