@@ -1,0 +1,32 @@
+name: Build Fortnite External
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Release x64
+        working-directory: source
+        run: |
+          msbuild "FN.sln" /p:Configuration=Release /p:Platform=x64 /m /v:minimal
+        continue-on-error: true
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fortnite-External-Release
+          path: |
+            source/x64/Release/*.exe
+            source/x64/Release/*.dll
+            source/ext/x64/Release/*.exe
+          if-no-files-found: warn
