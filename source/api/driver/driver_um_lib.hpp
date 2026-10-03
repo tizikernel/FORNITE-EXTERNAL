@@ -1,4 +1,8 @@
 #pragma once
+#ifndef LOG_INFO
+#define LOG_INFO(...) ((void)0)
+#endif
+
 #include "driver_includes.hpp"
 #include "driver_shared.hpp"
 
