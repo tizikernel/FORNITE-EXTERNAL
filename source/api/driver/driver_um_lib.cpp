@@ -40,6 +40,15 @@ extern "C" void nmi_restoring(trap_frame_t* trap_frame) {
     }
 }
 
+
+// Fallback if MASM unit is not linked
+extern "C" Win11HookFunc_type Win11HookFunc;
+extern "C" __int64 __fastcall asm_call_driver_win11(uint64_t a1, uint64_t a2, uint64_t nmi_restoring_addr) {
+    (void)nmi_restoring_addr;
+    if (!Win11HookFunc) return 0;
+    return Win11HookFunc(a1, a2);
+}
+
 namespace rose {
 
     // --- Standalone Mouse Driver Handle ---
