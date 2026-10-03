@@ -71,3 +71,26 @@ asm_call_driver proc
 asm_call_driver endp
 
 end
+; Win11 23H2+ path: 2-arg hook (a1=cmd, a2=signature), third arg unused here
+; Signature in C: asm_call_driver_win11(a1, a2, nmi_restoring_addr)
+extern Win11HookFunc:qword
+
+asm_call_driver_win11 proc
+	push qword ptr [stack_id]
+	; RCX = a1 (cmd), RDX = a2 (signature) already set by caller
+	call qword ptr [Win11HookFunc]
+	add rsp, 8h
+	ret
+asm_call_driver_win11 endp
+
+
+extern Win11HookFunc:qword
+
+asm_call_driver_win11 proc
+	push qword ptr [stack_id]
+	call qword ptr [Win11HookFunc]
+	add rsp, 8h
+	ret
+asm_call_driver_win11 endp
+
+end
