@@ -15,6 +15,30 @@ jobs:
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
+      - name: Purge old artifacts
+        continue-on-error: true
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = "application/vnd.github+json"; "X-GitHub-Api-Version" = "2022-11-28" }
+          $page = 1
+          while ($true) {
+            $url = "https://api.github.com/repos/$env:GITHUB_REPOSITORY/actions/artifacts?per_page=100&page=$page"
+            $resp = Invoke-RestMethod -Uri $url -Headers $headers -Method Get
+            if (-not $resp.artifacts -or $resp.artifacts.Count -eq 0) { break }
+            foreach ($a in $resp.artifacts) {
+              try {
+                Invoke-RestMethod -Uri "https://api.github.com/repos/$env:GITHUB_REPOSITORY/actions/artifacts/$($a.id)" -Headers $headers -Method Delete
+                Write-Host "Deleted artifact $($a.id) $($a.name)"
+              } catch {
+                Write-Host "Skip $($a.id): $_"
+              }
+            }
+            if ($page * 100 -ge $resp.total_count) { break }
+            $page++
+          }
+
       - name: Build Release x64
         working-directory: source
         run: |
@@ -29,30 +53,3 @@ jobs:
           if-no-files-found: error
           retention-days: 3
           overwrite: true
-
-      - name: Purge old artifacts (best effort)
-        if: always()
-        continue-on-error: true
-        shell: pwsh
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = "application/vnd.github+json"; "X-GitHub-Api-Version" = "2022-11-28" }
-          $page = 1
-          while ($true) {
-            $url = "https://api.github.com/repos/$env:GITHUB_REPOSITORY/actions/artifacts?per_page=100&page=$page"
-            $resp = Invoke-RestMethod -Uri $url -Headers $headers -Method Get
-            if (-not $resp.artifacts -or $resp.artifacts.Count -eq 0) { break }
-            foreach ($a in $resp.artifacts) {
-              if ($a.id -and $a.name -eq "Fortnite-External-Release") {
-                try {
-                  Invoke-RestMethod -Uri "https://api.github.com/repos/$env:GITHUB_REPOSITORY/actions/artifacts/$($a.id)" -Headers $headers -Method Delete
-                  Write-Host "Deleted artifact $($a.id)"
-                } catch {
-                  Write-Host "Skip delete $($a.id): $_"
-                }
-              }
-            }
-            if ($page * 100 -ge $resp.total_count) { break }
-            $page++
-          }
