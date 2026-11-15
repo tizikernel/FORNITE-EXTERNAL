@@ -39,9 +39,6 @@ bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstri
 		return false;
 	}
 
-	
-	
-
 	ULONG SE_LOAD_DRIVER_PRIVILEGE = 10UL;
 	BOOLEAN SeLoadDriverWasEnabled;
 	NTSTATUS Status = nt::RtlAdjustPrivilege(SE_LOAD_DRIVER_PRIVILEGE, TRUE, FALSE, &SeLoadDriverWasEnabled);
@@ -54,7 +51,42 @@ bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstri
 	UNICODE_STRING serviceStr;
 	RtlInitUnicodeString(&serviceStr, wdriver_reg_path.c_str());
 
+	// Disable Vulnerable Driver Blocklist for the load, then restore
+	HKEY hKey = NULL;
+	DWORD origVal = 1;
+	DWORD zero = 0;
+	DWORD sz = sizeof(DWORD);
+	bool patched = false;
+
+	if (RegOpenKeyExW(HKEY_LOCAL_MACHINE,
+		L"SYSTEM\\CurrentControlSet\\Control\\CI\\Config",
+		0, KEY_READ | KEY_SET_VALUE, &hKey) == ERROR_SUCCESS) {
+		if (RegQueryValueExW(hKey, L"VulnerableDriverBlocklistEnable",
+			nullptr, nullptr, (BYTE*)&origVal, &sz) == ERROR_SUCCESS) {
+			if (origVal != 0) {
+				if (RegSetValueExW(hKey, L"VulnerableDriverBlocklistEnable",
+					0, REG_DWORD, (BYTE*)&zero, sizeof(DWORD)) == ERROR_SUCCESS) {
+					patched = true;
+					Log("[+] Temporarily disabled VulnerableDriverBlocklistEnable" << std::endl);
+				}
+			}
+		}
+		RegCloseKey(hKey);
+	}
+
 	Status = nt::NtLoadDriver(&serviceStr);
+
+	// Restore original value
+	if (patched) {
+		if (RegOpenKeyExW(HKEY_LOCAL_MACHINE,
+			L"SYSTEM\\CurrentControlSet\\Control\\CI\\Config",
+			0, KEY_SET_VALUE, &hKey) == ERROR_SUCCESS) {
+			RegSetValueExW(hKey, L"VulnerableDriverBlocklistEnable",
+				0, REG_DWORD, (BYTE*)&origVal, sizeof(DWORD));
+			RegCloseKey(hKey);
+			Log("[+] Restored VulnerableDriverBlocklistEnable" << std::endl);
+		}
+	}
 
 	Log("[+] NtLoadDriver Status 0x" << std::hex << Status << std::endl);
 
@@ -67,7 +99,6 @@ bool service::RegisterAndStart(const std::wstring& driver_path, const std::wstri
 		Log("[-] Access Denied or Insufficient Resources (0x" << std::hex << Status << "), Probably some anticheat or antivirus running blocking the load of vulnerable driver" << std::endl);
 	}
 
-	
 	if (Status == STATUS_IMAGE_ALREADY_LOADED) {
 		return true;
 	}
