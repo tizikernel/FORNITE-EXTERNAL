@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -44,12 +48,23 @@ jobs:
         run: |
           msbuild "FN.sln" /p:Configuration=Release /p:Platform=x64 /m /v:minimal
 
-      - name: Upload Loader.exe
-        uses: actions/upload-artifact@v4
-        continue-on-error: true
+      - name: Verify Loader.exe exists
+        shell: pwsh
+        run: |
+          $p = "source/x64/Release/Loader.exe"
+          if (-not (Test-Path $p)) { throw "Loader.exe not found at $p" }
+          Get-Item $p | Format-List FullName, Length, LastWriteTime
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Fortnite-External-Release
-          path: source/x64/Release/Loader.exe
-          if-no-files-found: error
-          retention-days: 3
-          overwrite: true
+          tag_name: fornite-latest
+          name: FORNITE External (latest)
+          body: |
+            Build automatico desde `${{ github.sha }}`
+            Archivo: `Loader.exe`
+          files: source/x64/Release/Loader.exe
+          fail_on_unmatched_files: true
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
