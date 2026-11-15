@@ -6,6 +6,7 @@
 #include <signal.h>
 #include "../protection/protection.h"
 #include "../protection/security.hpp"
+#include "../protection/Backend/Backend.h"
 #include <Windows.h>
 #include <psapi.h>
 #include <csignal>
@@ -16,11 +17,8 @@
 #include <chrono>
 #include <algorithm>
 #include <utility>
+#include <thread>
 
-// --- MISSING WININET HEADERS ADDED HERE ---
-#include <wininet.h>
-#pragma comment(lib, "wininet.lib")
-// ------------------------------------------
 void LaunchMapperSilently(const std::string& exePath, const std::string& sysPath) {
     STARTUPINFOA si = { sizeof(si) };
     PROCESS_INFORMATION pi = { 0 };
@@ -28,7 +26,6 @@ void LaunchMapperSilently(const std::string& exePath, const std::string& sysPath
     si.cb = sizeof(si);
     si.dwFlags = STARTF_USESTDHANDLES;
 
-    // Redirect stdout/stderr to NUL so it doesn't need a visible window
     HANDLE hNull = CreateFileA("NUL", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     si.hStdOutput = hNull;
     si.hStdError = hNull;
@@ -36,7 +33,6 @@ void LaunchMapperSilently(const std::string& exePath, const std::string& sysPath
 
     std::string cmd = exePath + " " + sysPath;
 
-    // Use CREATE_NO_WINDOW to keep it invisible, but provide valid handles
     if (CreateProcessA(NULL, &cmd[0], NULL, NULL, TRUE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi)) {
         WaitForSingleObject(pi.hProcess, INFINITE);
         CloseHandle(pi.hProcess);
@@ -45,7 +41,6 @@ void LaunchMapperSilently(const std::string& exePath, const std::string& sysPath
 
     CloseHandle(hNull);
 }
-
 
 NTSTATUS Status = STATUS_UNSUCCESSFUL;
 void (*g_SecurityAlertHook)(const std::string&) = nullptr;
@@ -61,30 +56,8 @@ void signal_handler(int signal) {
     exit(0);
 }
 
-void PrintBanner() {
+int loadcheat() {
     system("cls");
-
-    auto print_line = [](const std::string& BRAND, const std::string& NAME) {
-        SetConsoleColor(11); // Cyan (#00ffff)
-        std::cout << BRAND;
-        SetConsoleColor(15); // Bright White
-        std::cout << NAME << std::endl;
-        };
-
-    std::cout << "\n" << std::endl;
-    print_line("░█████████ ░█████████ ░███    ░██ ░██ ░█████████ ░██     ░██", "");
-    print_line("       ░██ ░██        ░████   ░██ ░██    ░██     ░██     ░██", "");
-    print_line("     ░██   ░███████   ░██░██  ░██ ░██    ░██     ░██████████", "");
-    print_line("   ░██     ░██        ░██ ░██ ░██ ░██    ░██     ░██     ░██", "");
-    print_line(" ░██       ░██        ░██  ░██░██ ░██    ░██     ░██     ░██", "");
-    print_line("░█████████ ░█████████ ░██   ░████ ░██    ░██     ░██     ░██", "");
-
-    std::cout << "\n" << std::endl;
-}
-
-int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' work
-    system("cls"); // Cleaned up double parentheses
-    /*   PrintBanner();*/
     SetConsoleColor(10);
     std::cout << "\n\n\n  [+] ";
     SetConsoleColor(7);
@@ -125,15 +98,6 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
                 MessageBoxA(0, "The mapper could not load the API driver.", "INFO", 0);
                 Sleep(3500);
                 system("cls");
-                //std::cout << "Bytes Mapping Failed. Running Online Payload:";
-                //LaunchMapperSilently(
-                //    skCrypt("C:\\Windows\\GameBarPresenceWriter\\mp.exe").decrypt(),
-                //    skCrypt("C:\\Windows\\GameBarPresenceWriter\\drv.sys").decrypt()
-
-                //);
-                //system(skCrypt("del /f /q C:\\Windows\\GameBarPresenceWriter\\mp.exe >nul 2>&1").decrypt());
-                //system(skCrypt("del /f /q C:\\Windows\\GameBarPresenceWriter\\drv.sys >nul 2>&1").decrypt());
-                //std::cout << "Restart Loader.";
             }
 
             Sleep(500);
@@ -168,27 +132,18 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
 
     std::cout << "\n  [+] Waiting For Fortnite\n";
 
-    // Using a generic placeholder for the target process
     const wchar_t* target_process = L"FortniteClient-Win64-Shipping.exe";
 
     while (Kernel->m_process_id == 0) {
         try {
-            // Attempt to attach. 'attach' returns a boolean, so evaluate it directly.
             if (!Kernel->attach(target_process)) {
-                // Attach failed (returned false). Sleep and try again.
                 Sleep(800);
             }
             else {
-                // Attach succeeded. 
-                // It's safest to explicitly break out of the loop here rather 
-                // than relying entirely on m_process_id updating synchronously,
-                // which prevents potential infinite CPU spinning.
                 break;
             }
         }
         catch (...) {
-            // Catch-all prevents crashes if the attach method throws an exception.
-            // Sleep before continuing the loop so we don't spam attempts.
             Sleep(800);
         }
     }
@@ -203,8 +158,6 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
     settings::screen_center_x = globals.ScreenWidth / 2.0f;
     settings::screen_center_y = globals.ScreenHeight / 2.0f;
 
-    // system("cls");
-    //PrintBanner();
     SetConsoleColor(10);
     std::cout << "\n\n\n  [+] ";
     SetConsoleColor(7);
@@ -214,16 +167,12 @@ int loadcheat() { // CHANGED: from 'void' to 'int' so 'return 1' and 'return 0' 
         Sleep(10);
     }
 
-    // Hide the console window when overlay starts (works on Windows 11 Terminal too)
-    // FreeConsole();
-
     PROTECT_VIRTUAL_END;
     overlay::start();
 
-    return 0; // This now works because the function returns an int
+    return 0;
 }
 
-// --- RANDOM TITLE THREAD ---
 void RandomTitleThread() {
     srand((unsigned)time(NULL));
     const char alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
@@ -234,60 +183,61 @@ void RandomTitleThread() {
             title += alphanum[rand() % (sizeof(alphanum) - 1)];
         }
         SetConsoleTitleA(title.c_str());
-        Sleep(150); // Updates the title every 150ms
+        Sleep(150);
     }
 }
 
-// --- AUTO LOGIN SYSTEM ---
 std::string GetConfigPath() {
     char* appdata = nullptr;
     size_t len = 0;
-    _dupenv_s(&appdata, &len, "APPDATA"); // Gets the C:\Users\Username\AppData\Roaming folder safely
-    std::string path = "loader_auth.txt"; // Fallback to current folder if AppData fails
+    _dupenv_s(&appdata, &len, "APPDATA");
+    std::string path = "loader_auth.txt";
     if (appdata != nullptr) {
-        path = std::string(appdata) + "\\loader_auth.txt";
+        path = std::string(appdata) + "\\UnknownTeamFN\\key.txt";
         free(appdata);
+        CreateDirectoryA((std::string(getenv("APPDATA") ? getenv("APPDATA") : ".") + "\\UnknownTeamFN").c_str(), nullptr);
     }
     return path;
 }
 
-bool LoadAuth(std::string& discordId, std::string& licenseKey) {
+bool LoadSavedKey(std::string& licenseKey) {
     std::ifstream file(GetConfigPath());
     if (file.is_open()) {
-        std::getline(file, discordId);
         std::getline(file, licenseKey);
         file.close();
-        return (!discordId.empty() && !licenseKey.empty());
+        return !licenseKey.empty();
     }
     return false;
 }
 
-void SaveAuth(const std::string& discordId, const std::string& licenseKey) {
+void SaveKey(const std::string& licenseKey) {
+    char* appdata = nullptr;
+    size_t len = 0;
+    _dupenv_s(&appdata, &len, "APPDATA");
+    if (appdata) {
+        std::string dir = std::string(appdata) + "\\UnknownTeamFN";
+        CreateDirectoryA(dir.c_str(), nullptr);
+        free(appdata);
+    }
     std::ofstream file(GetConfigPath());
     if (file.is_open()) {
-        file << discordId << "\n" << licenseKey;
+        file << licenseKey;
         file.close();
     }
 }
-// -------------------------
 
 int main(int, char**)
 {
     SPOOF_FUNC;
-    std::string discordID = "1512923745139036265";
-    std::string serverID = "1508943708673015858";
-    // --- Unified Security Initialization ---
     g_SecurityAlertHook = [](const std::string& msg) {
         trigger_protection_alert(msg, ("Zenith"));
         };
 
     Security::Initialize();
     std::thread(protection_start).detach();
-    // ----------------------------------------
 
     PROTECT_VIRTUAL_START;
     SetConsoleOutputCP(CP_UTF8);
-    DWORD processID = 0;
     START_INTEGRITY_CHECK;
     START_ANTI_ATTACH;
     START_ANTI_DEBUG;
@@ -319,40 +269,32 @@ int main(int, char**)
             std::thread(RandomTitleThread).detach();
         }
 
-        /*       PrintBanner();*/
         SetConsoleColor(10);
         std::cout << ("\n\n\n  [+] ");
         SetConsoleColor(7);
         std::cout << ("Initializing, Doing Auth Checks....\n");
 
-        // --- UPDATED AUTO-LOGIN CREDENTIAL CHECK ---
-        std::string discordId, licenseKey;
+        std::string licenseKey;
         bool autoLoginSuccess = false;
 
-        if (LoadAuth(discordId, licenseKey)) {
+        if (LoadSavedKey(licenseKey)) {
             SetConsoleColor(10);
             std::cout << "  [+] ";
             SetConsoleColor(7);
-            std::cout << "Saved credentials found! Attempting auto-login...\n";
+            std::cout << "Saved key found! Validating...\n";
 
-            int authResult = 0;
-            if (authResult == 1) {
+            if (Backend::ValidateKeyOnline(licenseKey)) {
                 autoLoginSuccess = true;
             }
             else {
                 SetConsoleColor(4);
-                std::cout << "  [!] Auto-login failed (Key expired or invalid). Please enter manually.\n";
+                std::cout << "  [!] Auto-login failed: " << Backend::LastError() << "\n";
                 SetConsoleColor(7);
+                licenseKey.clear();
             }
         }
 
         if (!autoLoginSuccess) {
-            SetConsoleColor(10);
-            std::cout << "  [+] ";
-            SetConsoleColor(7);
-            std::cout << "Enter Discord ID: ";
-            std::cin >> discordId;
-
             SetConsoleColor(10);
             std::cout << "  [+] ";
             SetConsoleColor(7);
@@ -364,28 +306,11 @@ int main(int, char**)
             SetConsoleColor(7);
             std::cout << "Verifying License with Server...";
 
-            // Run the check!
-            int authResult = 0;
-
-            if (authResult == 0) {
+            if (!Backend::ValidateKeyOnline(licenseKey)) {
                 SetConsoleColor(4);
-                std::cout << "\n  [!] Invalid Discord ID or License Key! Exiting...\n";
+                std::cout << "\n  [!] " << Backend::LastError() << "\n";
                 SetConsoleColor(7);
                 Sleep(3000);
-                exit(1);
-            }
-            else if (authResult == 2) {
-                SetConsoleColor(4);
-                std::cout << "\n  [!] Your License Key has EXPIRED! Exiting...\n";
-                SetConsoleColor(7);
-                Sleep(3000);
-                exit(1);
-            }
-            else if (authResult == 3) {
-                SetConsoleColor(4);
-                std::cout << "\n  [!] VPN/PROXY DETECTED! Please disable your VPN to use this software.\n";
-                SetConsoleColor(7);
-                Sleep(4000);
                 exit(1);
             }
         }
@@ -394,13 +319,8 @@ int main(int, char**)
         std::cout << "\n  [+] ";
         SetConsoleColor(7);
         std::cout << "License Verified Successfully!\n";
-        SaveAuth(discordId, licenseKey);
+        SaveKey(licenseKey);
         Sleep(1000);
-
-        //if (!IsCommitPublic("mccalljrpatrick789-ux", "TempAuth", "ba7d23ac702268e3b2b81d5170a8205db7f529b1")) {
-        //    MessageBoxA(NULL, "Status: OFFLINE.", "Denied", MB_ICONERROR);
-        //    return 0;
-        //}
 
         loadcheat();
 

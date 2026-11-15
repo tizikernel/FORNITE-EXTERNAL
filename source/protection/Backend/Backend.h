@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
+
 namespace Backend
 {
-	namespace Utils
-	{
-		std::string SecureRequest(const std::string& URL);
-	}
+	bool ValidateKeyOnline(const std::string& key);
+	std::string LastError();
+	std::string MakeDeviceFingerprint();
 }
